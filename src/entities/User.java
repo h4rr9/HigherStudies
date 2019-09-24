@@ -1,4 +1,4 @@
-package beans;
+package entities;
 
 public class User {
 	String firstname = "";
@@ -105,4 +105,11 @@ public class User {
 		return true;
 
 	}
+
+	@Override
+	public String toString() {
+		return "User [firstname=" + firstname + ", lastname=" + lastname + ", email=" + email + ", password=" + password
+				+ ", dob=" + dob + ", number=" + number + ", message=" + message + "]";
+	}
+	
 }

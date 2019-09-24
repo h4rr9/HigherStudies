@@ -1,4 +1,4 @@
-package beans;
+package entities;
 
 public class Admin {
 	private String username;

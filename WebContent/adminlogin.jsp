@@ -40,17 +40,16 @@
 
 	<div>
 		<center>
-			<form method="post"
-				action="<%=response.encodeURL(request.getContextPath() + "/AdminController?action=dologin")%>">
+			<form method="post" action="<%=response.encodeURL(request.getContextPath() + "/AdminController?action=dologin")%>">
 				<div
 					style="background-color: white; margin-top: 4%; height: 500px; width: 448px; border: solid; border-color: #f0ead6; border-radius: 10px;">
 					<div class="field" style="margin-top: 30%;">
 						<input type="text" required autocomplete="off" id="user"
 							name="username" value="<%=request.getAttribute("username")%>">
 						<label for="user" title="Username" data-title="Email"></label>
-					</div>
 					<input type="password" class="form-control" placeholder="Password"
 						required autocomplete="off" id="pass" name="password">
+					</div>
 					<input type="submit" class="btn btn-primary" style="margin-top: 2%; margin-bottom: 2%;"
 						value="Login In">
 				</div>

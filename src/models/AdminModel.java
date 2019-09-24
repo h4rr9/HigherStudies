@@ -1,16 +1,16 @@
-package database;
+package models;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import beans.Admin;
+import entities.Admin;
 
-public class Super {
+public class AdminModel {
 	private Connection conn;
 
-	public Super(Connection conn) {
+	public AdminModel(Connection conn) {
 		super();
 		this.conn = conn;
 	}

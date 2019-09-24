@@ -89,7 +89,7 @@
 				<div class="col-6">
 					<div class="field">
 						<input type="number" required autocomplete="off" id="number"
-							name="number" value="<%=request.getAttribute("firstname")%>"> <label
+							name="number" value="<%=request.getAttribute("number")%>"> <label
 							for="number" title="Phone Number (10 digits)"
 							data-title="Phone Number"></label>
 					</div>

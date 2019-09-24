@@ -17,11 +17,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
-import beans.User;
-import database.Account;
+import entities.Admin;
+import models.AdminModel;
+import models.UserModel;
 
 /**
- * Servlet implementation class Controller
+ * Servlet implementation class UserController
  */
 public class UserController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -49,7 +50,6 @@ public class UserController extends HttpServlet {
 			throw new ServletException();
 		}
 	}
-
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
@@ -57,30 +57,7 @@ public class UserController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-
-		PrintWriter out = response.getWriter();
-		String action = request.getParameter("action");
-
-		if (action == null) {
-			response.sendRedirect("/HigherStudies");
-		} else if (action.equals("signup")) {
-			request.setAttribute("firstname", "");
-			request.setAttribute("lastname", "");
-			request.setAttribute("email", "");
-			request.setAttribute("password", "");
-			request.setAttribute("repeatpassword", "");
-			request.setAttribute("dob", "");
-			request.setAttribute("number", "");
-			request.setAttribute("message", "");
-			request.getRequestDispatcher("/signup.jsp").forward(request, response);
-		} else if (action.equals("login")) {
-			request.setAttribute("email", "");
-			request.setAttribute("message", "");
-			request.getRequestDispatcher("/login.jsp").forward(request, response);
-		} else {
-			out.println("Unknown action.");
-			return;
-		}
+		doPost(request, response);
 	}
 
 	/**
@@ -90,7 +67,6 @@ public class UserController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-
 		Connection conn = null;
 		try {
 			conn = ds.getConnection();
@@ -99,98 +75,38 @@ public class UserController extends HttpServlet {
 			throw new ServletException();
 		}
 
-		PrintWriter out = response.getWriter();
 		String action = request.getParameter("action");
-		Account account = new Account(conn);
+		PrintWriter out = response.getWriter();
+		AdminModel supr = new AdminModel(conn);
 
 		if (action == null) {
-			response.sendRedirect("/HigherStudies");
-		} else if (action.equals("createaccount")) {
-			String firstname = request.getParameter("firstname");
-			String lastname = request.getParameter("lastname");
-			String email = request.getParameter("email");
-			String password = request.getParameter("password");
-			String repeatPassword = request.getParameter("repeatpassword");
-			String dob = request.getParameter("dob");
-			String number = request.getParameter("number");
-
-			if (!password.equals(repeatPassword)) {
-				request.setAttribute("firstname", firstname);
-				request.setAttribute("lastname", lastname);
-				request.setAttribute("email", email);
-				request.setAttribute("password", password);
-				request.setAttribute("repeatpassword", repeatPassword);
-				request.setAttribute("dob", dob);
-				request.setAttribute("number", number);
-				request.setAttribute("message", "Passwords do not match.");
-				request.getRequestDispatcher("/signup.jsp").forward(request, response);
-			} else {
-				User user = new User(firstname, lastname, email, password, dob, number);
-
-				if (!user.validate()) {
-					request.setAttribute("firstname", firstname);
-					request.setAttribute("lastname", lastname);
-					request.setAttribute("email", email);
-					request.setAttribute("password", password);
-					request.setAttribute("repeatpassword", repeatPassword);
-					request.setAttribute("dob", dob);
-					request.setAttribute("number", number);
-					request.setAttribute("message", user.getMessage());
-					request.getRequestDispatcher("/signup.jsp").forward(request, response);
-				} else {
-					try {
-						if (account.exists(user)) {
-							request.setAttribute("firstname", firstname);
-							request.setAttribute("lastname", lastname);
-							request.setAttribute("email", email);
-							request.setAttribute("password", password);
-							request.setAttribute("repeatpassword", repeatPassword);
-							request.setAttribute("dob", dob);
-							request.setAttribute("number", number);
-							request.setAttribute("message", "An account with this email already exists.");
-							request.getRequestDispatcher("/signup.jsp").forward(request, response);
-						} else {
-							account.create(user);
-							request.setAttribute("email", "");
-							request.getRequestDispatcher("/login.jsp").forward(request, response);
-						}
-					} catch (SQLException e) {
-						e.printStackTrace();
-						request.getRequestDispatcher("/error.jsp").forward(request, response);
-					}
-				}
-			}
-
-		} else if (action.equals("dologin")) {
-			String email = request.getParameter("email");
-			String password = request.getParameter("password");
-
-			User user = new User(email, password);
-
-			request.setAttribute("email", email);
-			request.setAttribute("password", "");
+			out.println("Action not specified.");
+		} else if (action.contentEquals("delete")) {
+			UserModel userModel = new UserModel(conn);
 
 			try {
-				if (account.login(user)) {
-					HttpSession session = request.getSession();
+				String user = request.getParameter("user");
+				String email = request.getParameter("email");
 
-					String firstname = account.getFirstName(user);
-					session.setAttribute("name", firstname);
+				HttpSession session = request.getSession();
 
-					request.getRequestDispatcher("/loginsuccess.jsp").forward(request, response);
+				String curruser = (String) session.getAttribute("user");
+
+				if (curruser == null) {
+					response.sendRedirect("/HigherStudies/AdminController?action=login");
+				} else if (curruser.equals(user)) {
+					userModel.removeUser(email);
+					response.sendRedirect("/HigherStudies/AdminController?action=users");
 				} else {
-					request.setAttribute("message", "Email or Password not recognised");
-					request.getRequestDispatcher("/login.jsp").forward(request, response);
+					response.sendRedirect("/HigherStudies/AdminController?action=login");
 				}
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 				// Do something.
 			}
-
 		} else {
 			out.println("Unknown action.");
-			return;
 		}
 
 		try {

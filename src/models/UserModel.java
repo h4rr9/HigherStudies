@@ -1,17 +1,18 @@
-package database;
+package models;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
-import beans.User;
+import entities.User;
 
-public class Account {
+public class UserModel {
 
 	private Connection conn;
 
-	public Account(Connection conn) {
+	public UserModel(Connection conn) {
 		super();
 		this.conn = conn;
 	}
@@ -103,6 +104,37 @@ public class Account {
 
 		stmt.executeUpdate();
 
+		stmt.close();
+	}
+	
+	public ArrayList<User> getAllAccounts() throws SQLException {
+		
+		ArrayList<User> users = new ArrayList<User>();
+		String sql = "SELECT * FROM users";
+		PreparedStatement stmt = (PreparedStatement)conn.prepareStatement(sql);
+		ResultSet rs = stmt.executeQuery();
+		
+		while(rs.next()) {
+			String firstname = rs.getString("firstname");
+			String lastname = rs.getString("lastname");
+			String email = rs.getString("email");
+			String password = rs.getString("password");
+			String dob = rs.getString("dob");
+			String number = rs.getString("number");
+			
+			users.add(new User(firstname, lastname, email, password, dob, number));
+			
+		}
+		
+		rs.close();
+		return users;
+	}
+	
+	public void removeUser(String email) throws SQLException {
+		String sql = "DELETE FROM users WHERE email=?";
+		PreparedStatement stmt = (PreparedStatement)conn.prepareStatement(sql);
+		stmt.setString(1, email);
+		stmt.executeUpdate();
 		stmt.close();
 	}
 }
