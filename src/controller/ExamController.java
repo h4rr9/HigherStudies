@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
+import javax.servlet.Servlet;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -17,9 +18,8 @@ import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
 import entities.Exam;
-import entities.Exam;
 import models.ExamModel;
-import models.ExamModel;
+import models.MaterialModel;
 
 /**
  * Servlet implementation class ExamController
@@ -59,7 +59,15 @@ public class ExamController extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		String action = request.getParameter("action");
 		HttpSession session = request.getSession();
-
+		
+		Connection conn = null;
+		try {
+			conn = ds.getConnection();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			throw new ServletException();
+		}
+		
 		if (action == null) {
 			out.println("action not specified");
 		} else if (action.equals("add")) {
@@ -68,19 +76,20 @@ public class ExamController extends HttpServlet {
 			if (curruser == null) {
 				response.sendRedirect("/HigherStudies/AdminController?action=login");
 			} else if (curruser.equals(user)) {
+				
+				try {
+					MaterialModel materialModel = new MaterialModel(conn);
+					request.setAttribute("materials", materialModel.getAllMaterials());
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				request.getRequestDispatcher("/adminaddexam.jsp").forward(request, response);
 			} else {
 				response.sendRedirect("/HigherStudies/AdminController?action=login");
 			}
 		} else if (action.equals("edit")) {
 
-			Connection conn = null;
-			try {
-				conn = ds.getConnection();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				throw new ServletException();
-			}
 
 			ExamModel examModel = new ExamModel(conn);
 
@@ -104,13 +113,13 @@ public class ExamController extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-
-			try {
-				conn.close();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		}
+		
+		try {
+			conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 

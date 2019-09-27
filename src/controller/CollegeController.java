@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -18,7 +19,11 @@ import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
 import entities.College;
+import entities.Course;
+import entities.Exam;
 import models.CollegeModel;
+import models.CourseModel;
+import models.ExamModel;
 
 /**
  * Servlet implementation class CollegeController
@@ -62,27 +67,47 @@ public class CollegeController extends HttpServlet {
 		String action = request.getParameter("action");
 		HttpSession session = request.getSession();
 
+		Connection conn = null;
+		try {
+			conn = ds.getConnection();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			throw new ServletException();
+		}
+
 		if (action == null) {
 			out.println("action not specified");
 		} else if (action.equals("add")) {
 			String user = request.getParameter("user");
 			String curruser = (String) session.getAttribute("user");
+			
 			if (curruser == null) {
 				response.sendRedirect("/HigherStudies/AdminController?action=login");
 			} else if (curruser.equals(user)) {
+				
+				ExamModel examModel = new ExamModel(conn);
+				try {
+					ArrayList<Exam> exams= examModel.getAllExams();
+					request.setAttribute("exams", exams);
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				CourseModel courseModel = new CourseModel(conn);
+				try {
+					ArrayList<Course> courses= courseModel.getAllCourses();
+					request.setAttribute("courses", courses);
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
 				request.getRequestDispatcher("/adminaddcollege.jsp").forward(request, response);
 			} else {
 				response.sendRedirect("/HigherStudies/AdminController?action=login");
 			}
 		} else if (action.equals("edit")) {
-
-			Connection conn = null;
-			try {
-				conn = ds.getConnection();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				throw new ServletException();
-			}
 
 			CollegeModel collegeModel = new CollegeModel(conn);
 
@@ -106,13 +131,13 @@ public class CollegeController extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		}
 
-			try {
-				conn.close();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		try {
+			conn.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 

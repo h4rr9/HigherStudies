@@ -22,7 +22,7 @@
       <a href = "<%=response.encodeURL(request.getContextPath() + "/AdminController?action=courses")%>">Courses</a>
       <a href = "<%=response.encodeURL(request.getContextPath() + "/AdminController?action=colleges")%>">Colleges</a>
       <a href = "<%=response.encodeURL(request.getContextPath() + "/AdminController?action=exams")%>">Exams</a>
-      <a href = "<%=response.encodeURL(request.getContextPath() + "/AdminController?action=material")%>">Materials</a>
+      <a href = "<%=response.encodeURL(request.getContextPath() + "/AdminController?action=materials")%>">Materials</a>
       <p style="float: right; color: white;"><%=session.getAttribute("user")%></p> 
  </div>
 

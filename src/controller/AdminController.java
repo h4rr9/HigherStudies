@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -18,7 +19,7 @@ import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
 import entities.Admin;
-import entities.College;
+import entities.Material;
 import models.AdminModel;
 import models.CollegeModel;
 import models.CourseModel;
@@ -154,6 +155,8 @@ public class AdminController extends HttpServlet {
 				ExamModel examModel = new ExamModel(conn);
 
 				try {
+					MaterialModel materialModel = new MaterialModel(conn);
+					request.setAttribute("materials", materialModel.getAllMaterials());
 					request.setAttribute("exams", examModel.getAllExams());
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block

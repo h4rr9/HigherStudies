@@ -10,6 +10,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/js/select2.min.js"></script>
 </head>
 <body>
+<%@page import="java.util.ArrayList, entities.Material" %>
+<% ArrayList<Material> materials = (ArrayList<Material>)request.getAttribute("materials"); %>
 <form method="post" action="<%=response.encodeURL(request.getContextPath() + "/ExamController?action=create")%>">
 <input type="hidden" name="user" value="<%=session.getAttribute("user")%>"/>
 <p>Name</p>
@@ -20,11 +22,9 @@
 <input type="text" name="image"/>
 <p>Portions:</p> 
 <select class="js-example-basic-multiple js-states form-control" name="portions[]" multiple="multiple">
-<option value="Physics">Physics</option>
-<option value="Maths">Maths</option>
-<option value="Chemistry">Chemistry</option>
-<option value="Verbal">Verbal</option>
-<option value="Quantitative">Quantitative</option>
+<%for(Material material : materials){ %>
+<option value="<%=material.getName()%>"><%=material.getName()%></option>
+<%} %>
 </select>
 <input type="submit" value="submit"/>
 </form>

@@ -9,8 +9,11 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.10/js/select2.min.js"></script>
 </head>
-<%@page import="java.util.ArrayList, entities.College" %>
-<% ArrayList<College> colleges=(ArrayList<College>)request.getAttribute("colleges"); %>
+<%@page import="java.util.ArrayList, entities.Course, entities.Exam" %>
+<%
+	ArrayList<Course> courses=(ArrayList<Course>)request.getAttribute("courses");
+	ArrayList<Exam> exams=(ArrayList<Exam>)request.getAttribute("exams");
+%>
 <body>
 <form method="post" action="<%=response.encodeURL(request.getContextPath() + "/CollegeController?action=create")%>">
 <input type="hidden" name="user" value="<%=session.getAttribute("user")%>"/>
@@ -22,23 +25,24 @@
 <input type="text" name="image"/>
 <p>Courses:</p> 
 <select class="js-example-basic-multiple js-states form-control" name="courses[]" multiple="multiple">
-<option value="BTech">BTech</option>
-<option value="BSc">BSc</option>
-<option value="MBA">MBA</option>
-<option value="MTech">MTech</option>
-<option value="MSc">MSc</option>
+<%for(Course course: courses){ %>
+<option value="<%=course.getName()%>"><%=course.getName()%></option>
+<%}%>
 </select>
 <p>Exams:</p>
 <select class="js-example-basic-multiple js-states form-control" name="exams[]" multiple="multiple">
-<option value="JEE Mains">JEE Mains</option>
-<option value="AEEE">AEEE</option>
+<%for(Exam exam: exams){ %>
+<option value="<%=exam.getName()%>"><%=exam.getName()%></option>
+<%}%>
 </select>
 </p>
 <input type="submit" value="submit"/>
 </form>
 <script>
 $(document).ready(function() {
-    $('.js-example-basic-multiple').select2();
+    $('.js-example-basic-multiple').select2({
+    	tags: true
+    });
 });
 </script>
 </body>

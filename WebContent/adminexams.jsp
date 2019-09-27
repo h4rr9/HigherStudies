@@ -23,7 +23,7 @@
       <a href = "<%=response.encodeURL(request.getContextPath() + "/AdminController?action=colleges")%>">Colleges</a>
       <a class = "active" href = "<%=response.encodeURL(request.getContextPath() + "/AdminController?action=exams")%>">Exams</a>
       <a href = "<%=response.encodeURL(request.getContextPath() + "/AdminController?action=materials")%>">Materials</a>
-      <p style="float: right; color: white;"><%=session.getAttribute("name")%></p> 
+      <p style="float: right; color: white;"><%=session.getAttribute("user")%></p> 
  </div>
 
 <div class="container">
