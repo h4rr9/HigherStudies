@@ -31,7 +31,7 @@
         $('#error_alert').hide();
     </script>
 
-	<form method="post" action="<%= response.encodeURL(request.getContextPath() + "/UserController?action=createaccount") %>" class="container">
+	<form method="post" action="<%= response.encodeURL(request.getContextPath() + "/MainController?action=createaccount") %>" class="container">
 		<h1 style="margin-top: 10%; text-align: center;">User Sign Up</h1>
 		<div
 			style="margin-top: 10%; border: solid; border-color: #f0ead6; border-radius: 10px; padding: 20px;">

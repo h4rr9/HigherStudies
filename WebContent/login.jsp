@@ -21,7 +21,7 @@
 </head>
 <body>
 <div class = "topnav">
-      <a class = "active" href = "<%=response.encodeURL(request.getContextPath() + "/UserController?action=login")%>">Login</a> 
+      <a class = "active" href = "<%=response.encodeURL(request.getContextPath() + "/MainController?action=login")%>">Login</a> 
     </div>
 
     <div class="container" style="width: 500px;margin-left: 65%; margin-top: 1%;">
@@ -36,7 +36,7 @@
 
     <h2 style="text-align: center; margin-top: 6%;">Login</h2>
 
-    <form method="post" action="<%= response.encodeURL(request.getContextPath() + "/UserController?action=dologin") %>">
+    <form method="post" action="<%= response.encodeURL(request.getContextPath() + "/MainController?action=dologin") %>">
       <center>
         <div style="background-color: white; margin-top: 4%; height: 500px; width: 448px; border: solid; border-color: #f0ead6; border-radius: 10px;">
           <div class="field" style="margin-top: 30%;">

@@ -176,9 +176,9 @@ public class MainController extends HttpServlet {
 					HttpSession session = request.getSession();
 
 					String firstname = userModel.getFirstName(user);
-					session.setAttribute("name", firstname);
+					session.setAttribute("user", firstname);
 
-					request.getRequestDispatcher("/loginsuccess.jsp").forward(request, response);
+					request.getRequestDispatcher("/search.jsp").forward(request, response);
 				} else {
 					request.setAttribute("message", "Email or Password not recognised");
 					request.getRequestDispatcher("/login.jsp").forward(request, response);

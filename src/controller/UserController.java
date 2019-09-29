@@ -77,8 +77,6 @@ public class UserController extends HttpServlet {
 
 		String action = request.getParameter("action");
 		PrintWriter out = response.getWriter();
-		AdminModel supr = new AdminModel(conn);
-
 		if (action == null) {
 			out.println("Action not specified.");
 		} else if (action.contentEquals("delete")) {

@@ -22,10 +22,10 @@
 <body>
 	<div class="topnav">
 		<a class="active"
-			href="<%=response.encodeURL(request.getContextPath() + "/Controller")%>">Home</a>
+			href="<%=response.encodeURL(request.getContextPath() + "/MainController")%>">Home</a>
 		<button class="btn btn-primary"
 			style="float: right; margin-top: 0.25%; margin-right: 1%;"
-			onclick='window.location.href="<%=response.encodeURL(request.getContextPath() + "/UserController?action=login")%>"'>Login</button>
+			onclick='window.location.href="<%=response.encodeURL(request.getContextPath() + "/MainController?action=login")%>"'>Login</button>
 	</div>
 
 	<div class="bg-text" style="margin-top: -10%;">
@@ -62,7 +62,7 @@
 	<div>
 		<button id="btn-search" class="btn btn-outline-primary"
 			style="margin-left: 45.5%; margin-top: 40%"
-			onclick='window.location.href="<%=response.encodeURL(request.getContextPath() + "/UserController?action=signup")%>"'>Sign
+			onclick='window.location.href="<%=response.encodeURL(request.getContextPath() + "/MainController?action=signup")%>"'>Sign
 			Up</button>
 	</div>
 </body>
