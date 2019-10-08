@@ -56,6 +56,30 @@ public class CollegeModel {
 		rs.close();
 		return colleges;
 	}
+	
+	public ArrayList<College> searchColleges(String value) throws SQLException {
+
+		ArrayList<College> colleges = new ArrayList<College>();
+		String sql = "SELECT * FROM colleges WHERE LOWER(name) LIKE ?";
+		PreparedStatement stmt = (PreparedStatement) conn.prepareStatement(sql);
+		value = '%' + value.toLowerCase() + '%';
+		stmt.setString(1, value);
+		ResultSet rs = stmt.executeQuery();
+
+		while (rs.next()) {
+			String name = rs.getString("name");
+			String about = rs.getString("about");
+			String image = rs.getString("image");
+			String[] courses = (String[]) rs.getArray("courses").getArray();
+			String[] exams = (String[]) rs.getArray("exams").getArray();
+
+			colleges.add(new College(name, about, image, courses, exams));
+
+		}
+
+		rs.close();
+		return colleges;
+	}
 
 	public College getCollege(String collegename) throws SQLException {
 

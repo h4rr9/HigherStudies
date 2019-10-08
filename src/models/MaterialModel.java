@@ -52,6 +52,29 @@ public class MaterialModel {
 		rs.close();
 		return materials;
 	}
+	
+	public ArrayList<Material> searchMaterials(String value) throws SQLException {
+
+		ArrayList<Material> materials = new ArrayList<Material>();
+		String sql = "SELECT * FROM materials WHERE LOWER(name) LIKE ?";
+		PreparedStatement stmt = (PreparedStatement) conn.prepareStatement(sql);
+		value = '%' + value.toLowerCase() + '%';
+		stmt.setString(1, value);
+		ResultSet rs = stmt.executeQuery();
+
+		while (rs.next()) {
+			String name = rs.getString("name");
+			String about = rs.getString("about");
+			String image = rs.getString("image");
+			String[] references = (String[]) rs.getArray("resources").getArray();
+
+			materials.add(new Material(name, about, image, references));
+
+		}
+
+		rs.close();
+		return materials;
+	}
 
 	public Material getMaterial(String materialname) throws SQLException {
 

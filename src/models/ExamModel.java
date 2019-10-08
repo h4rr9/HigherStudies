@@ -52,6 +52,29 @@ public class ExamModel {
 		rs.close();
 		return exams;
 	}
+	
+	public ArrayList<Exam> searchExams(String value) throws SQLException {
+
+		ArrayList<Exam> exams = new ArrayList<Exam>();
+		String sql = "SELECT * FROM exams WHERE LOWER(name) LIKE ?";
+		PreparedStatement stmt = (PreparedStatement) conn.prepareStatement(sql);
+		value = '%' + value.toLowerCase() + '%';
+		stmt.setString(1, value);
+		ResultSet rs = stmt.executeQuery();
+
+		while (rs.next()) {
+			String name = rs.getString("name");
+			String about = rs.getString("about");
+			String[] portions = (String[]) rs.getArray("portions").getArray();
+			String image = rs.getString("image");
+
+			exams.add(new Exam(name, about, image, portions));
+
+		}
+
+		rs.close();
+		return exams;
+	}
 
 	public Exam getExam(String examname) throws SQLException {
 

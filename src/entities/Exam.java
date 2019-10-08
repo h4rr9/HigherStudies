@@ -1,5 +1,7 @@
 package entities;
 
+import java.util.Arrays;
+
 public class Exam {
 	private String name;
 	private String about;
@@ -12,6 +14,12 @@ public class Exam {
 		this.about = about;
 		this.image = image;
 		this.portions = portions;
+	}
+
+	@Override
+	public String toString() {
+		return "Exam [name=" + name + ", about=" + about + ", image=" + image + ", portions="
+				+ Arrays.toString(portions) + "]";
 	}
 
 	public String getName() {

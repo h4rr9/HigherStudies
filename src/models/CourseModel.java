@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import entities.College;
 import entities.Course;
 
 public class CourseModel {
@@ -36,6 +37,29 @@ public class CourseModel {
 		ArrayList<Course> courses = new ArrayList<Course>();
 		String sql = "SELECT * FROM courses";
 		PreparedStatement stmt = (PreparedStatement) conn.prepareStatement(sql);
+		ResultSet rs = stmt.executeQuery();
+
+		while (rs.next()) {
+			String name = rs.getString("name");
+			String about = rs.getString("about");
+			String prospects = rs.getString("prospects");
+			String image = rs.getString("image");
+
+			courses.add(new Course(name, about, prospects, image));
+
+		}
+
+		rs.close();
+		return courses;
+	}
+	
+	public ArrayList<Course> searchCourses(String value) throws SQLException {
+
+		ArrayList<Course> courses = new ArrayList<Course>();
+		String sql = "SELECT * FROM courses WHERE LOWER(name) LIKE ?";
+		PreparedStatement stmt = (PreparedStatement) conn.prepareStatement(sql);
+		value = '%' + value.toLowerCase() + '%';
+		stmt.setString(1, value);
 		ResultSet rs = stmt.executeQuery();
 
 		while (rs.next()) {

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -17,7 +18,15 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
+import entities.College;
+import entities.Course;
+import entities.Exam;
+import entities.Material;
 import entities.User;
+import models.CollegeModel;
+import models.CourseModel;
+import models.ExamModel;
+import models.MaterialModel;
 import models.UserModel;
 
 /**
@@ -77,6 +86,34 @@ public class MainController extends HttpServlet {
 			request.setAttribute("email", "");
 			request.setAttribute("message", "");
 			request.getRequestDispatcher("/login.jsp").forward(request, response);
+		} else if (action.equals("search")) {
+			request.getRequestDispatcher("/search.jsp").forward(request, response);
+		} else if (action.equals("materials")) {
+			Connection conn = null;
+			try {
+				conn = ds.getConnection();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				throw new ServletException();
+			}
+
+			MaterialModel materialModel = new MaterialModel(conn);
+			
+			try {
+				ArrayList<Material> materialArray = materialModel.getAllMaterials();
+				request.setAttribute("materials", materialArray);
+				request.getRequestDispatcher("/studymaterials.jsp").forward(request, response);
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		} else {
 			out.println("Unknown action.");
 			return;
@@ -187,6 +224,30 @@ public class MainController extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 				// Do something.
+			}
+
+		} else if (action.equals("search")) {
+			CollegeModel collegeModel = new CollegeModel(conn);
+			CourseModel courseModel = new CourseModel(conn);
+			ExamModel examModel = new ExamModel(conn);
+			MaterialModel materialModel = new MaterialModel(conn);
+
+			String value = request.getParameter("searchparameter");
+
+			try {
+				ArrayList<College> collegeList = collegeModel.searchColleges(value);
+				ArrayList<Course> courseList = courseModel.searchCourses(value);
+				ArrayList<Exam> examList = examModel.searchExams(value);
+
+				request.setAttribute("colleges", collegeList);
+				request.setAttribute("courses", courseList);
+				request.setAttribute("exams", examList);
+
+				request.getRequestDispatcher("/searchresults.jsp").forward(request, response);
+
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 
 		} else {
