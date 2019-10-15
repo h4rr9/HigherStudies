@@ -63,7 +63,7 @@
 	    		<div class="col-10">
 	    		<%for(int i=0;i<college_count;i++){%>
 	    			<a href="<%=response.encodeURL(request.getContextPath() + "/PageController?type=college&page=" + collegeList.get(i).getName())%>" style="color: black; text-decoration: none;">
-	    				<div class="card" style="width: 100%; height: 175px;">
+	    				<div class="card" style="width: 100%; height: 175px; margin-top: 2%;">
 	    					<div class="row">
 	    						<div class="col-9">
 	    							<h2 style="margin-top: 0.0125%"><%=collegeList.get(i).getName()%></h2>
@@ -78,7 +78,7 @@
 	    		<%}%>
 	    		<%for(int i=0;i<course_count;i++){%>
 	    			<a href="<%=response.encodeURL(request.getContextPath() + "/PageController?type=course&page=" + courseList.get(i).getName())%>" style="color: black; text-decoration: none;">
-	    				<div class="card" style="width: 100%; height: 175px;">
+	    				<div class="card" style="width: 100%; height: 175px; margin-top: 2%;">
 	    					<div class="row">
 	    						<div class="col-9">
 	    							<h2 style="margin-top: 0.0125%"><%=courseList.get(i).getName()%></h2>
@@ -93,7 +93,7 @@
 	    		<%}%>
 	    		<%for(int i=0;i<exam_count;i++){%>
 	    			<a href="<%=response.encodeURL(request.getContextPath() + "/PageController?type=exam&page=" + examList.get(i).getName())%>" style="color: black; text-decoration: none;">
-	    				<div class="card" style="width: 100%; height: 175px;">
+	    				<div class="card" style="width: 100%; height: 175px; margin-top: 2%;">
 	    					<div class="row">
 	    						<div class="col-9">
 	    							<h2 style="margin-top: 0.0125%"><%=examList.get(i).getName()%></h2>
