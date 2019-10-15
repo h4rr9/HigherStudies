@@ -19,13 +19,9 @@
 <form method="post" action="<%=response.encodeURL(request.getContextPath() + "/CollegeController?action=edit")%>">
 <input type="hidden" name="user" value="<%=session.getAttribute("user")%>"/>
 <input type="hidden" name="tobemodified" value="<%=college.getName()%>"/>
-<p>Name</p>
-<input type="text" name="name" value="<%=college.getName()%>"/>
-<p>About</p>
-<textarea  rows="4" cols="50" name="about"><%=college.getAbout()%></textarea>
-<p>Image</p>
-<input type="text" name="image" value="<%=college.getImage()%>"/>
-	
+<h4>Name</h4> <input type="text" name="name" value="<%=college.getName()%>"/>
+<p>About</p> <textarea  rows="4" cols="50" name="about"><%=college.getAbout()%></textarea>
+<p>Image</p> <input type="text" name="image" value="<%=college.getImage()%>"/>
 <p>Courses:</p> 
 <select class="js-example-basic-multiple js-states form-control" name="courses[]" multiple="multiple">
 <option value="BTech" <%=courseSet.contains("BTech") ? "selected" : ""%>>BTech</option>

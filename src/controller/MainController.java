@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -98,7 +99,7 @@ public class MainController extends HttpServlet {
 			}
 
 			MaterialModel materialModel = new MaterialModel(conn);
-			
+
 			try {
 				ArrayList<Material> materialArray = materialModel.getAllMaterials();
 				request.setAttribute("materials", materialArray);
@@ -114,10 +115,29 @@ public class MainController extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		}else if (action.equals("getfile")) {
+			response.setContentType("text/html");
+			String filename = "materials.zip";
+			String filepath = "D:\\java workspace\\MaterialFiles\\";
+			response.setContentType("APPLICATION/OCTET-STREAM");
+			response.setHeader("Content-Disposition", "attachment; filename=\"" + filename + "\"");
+
+			FileInputStream fileInputStream = new FileInputStream(filepath + filename);
+
+			int i;
+			while ((i = fileInputStream.read()) != -1) {
+				out.write(i);
+			}
+			fileInputStream.close();
+			out.close();
+			
+			request.getRequestDispatcher("/studymaterials.jsp").forward(request, response);
 		} else {
 			out.println("Unknown action.");
 			return;
 		}
+		
+		
 	}
 
 	/**

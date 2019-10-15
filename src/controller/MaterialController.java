@@ -1,9 +1,11 @@
 package controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -16,6 +18,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
+
+import org.apache.tomcat.util.http.fileupload.FileItem;
+import org.apache.tomcat.util.http.fileupload.FileItemFactory;
+import org.apache.tomcat.util.http.fileupload.FileUploadException;
+import org.apache.tomcat.util.http.fileupload.RequestContext;
+import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
+import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
+import org.apache.tomcat.util.http.fileupload.servlet.ServletRequestContext;
 
 import entities.Material;
 import models.MaterialModel;
@@ -113,6 +123,16 @@ public class MaterialController extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		} else if (action.equals("addfile")) {
+			String user = request.getParameter("user");
+			String curruser = (String) session.getAttribute("user");
+			if (curruser == null) {
+				response.sendRedirect("/HigherStudies/AdminController?action=login");
+			} else if (curruser.equals(user)) {
+				request.getRequestDispatcher("/adminaddmaterialfile.jsp").forward(request, response);
+			} else {
+				response.sendRedirect("/HigherStudies/AdminController?action=login");
+			}
 		}
 
 	}
@@ -145,7 +165,7 @@ public class MaterialController extends HttpServlet {
 			String about = request.getParameter("about");
 			String image = request.getParameter("image");
 			String[] references = request.getParameterValues("references[]");
-			
+
 			Material material = new Material(name, about, image, references);
 
 			String curruser = (String) session.getAttribute("user");
@@ -219,6 +239,47 @@ public class MaterialController extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+		} else if (action.equals("addfile")) {
+
+			if (!ServletFileUpload.isMultipartContent(request)) {
+				out.println("Nothing uploaded");
+				return;
+			}
+
+			FileItemFactory itemFactory = new DiskFileItemFactory();
+			ServletFileUpload upload = new ServletFileUpload(itemFactory);
+
+			try {
+				List<FileItem> items = upload.parseRequest(new ServletRequestContext(request));
+				
+				for (FileItem item : items) {
+					if(item.getName() == null) {
+						continue;
+					}
+					
+					if(!item.getContentType().equals("application/x-zip-compressed")) {
+						out.println("only zip files are permitted.");
+						continue;
+					}
+					
+//					File uploadDir = new File("D:\\java workspace\\MaterialFiles");
+//					File file = File.createTempFile("zip", ".zip", uploadDir);
+					
+					File file = new File("D:\\java workspace\\MaterialFiles\\materials.zip");
+					
+					item.write(file);
+				}
+			} catch (FileUploadException e) {
+				// TODO Auto-generated catch block
+				out.println("Upload Failed");
+				return;
+			}
+			catch (Exception ex) {
+				out.println("Cannot save file");
+			}
+			
+			response.sendRedirect("/HigherStudies/AdminController?action=materials");
+
 		} else {
 			out.println("Unknown action " + action);
 		}

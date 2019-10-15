@@ -47,6 +47,9 @@
       			}%>
       </div>
       <%}%>
+      
+      <a href="<%=response.encodeURL(request.getContextPath() + "/MainController?action=getfile")%>"><button>Download Materials</button></a>
+      
     </div>
 </body>
 </html>

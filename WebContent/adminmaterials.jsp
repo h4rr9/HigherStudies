@@ -3,15 +3,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="ISO-8859-1">
-	<title>Materials</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/HigherStudies/stylesheets/style.css">
-    <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<meta charset="ISO-8859-1">
+<title>Materials</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/HigherStudies/stylesheets/style.css">
+<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </head>
 <body>
 <%@page import="entities.Material, java.util.ArrayList, java.util.Arrays"%>
@@ -23,7 +23,7 @@
       <a href = "<%=response.encodeURL(request.getContextPath() + "/AdminController?action=colleges")%>">Colleges</a>
       <a href = "<%=response.encodeURL(request.getContextPath() + "/AdminController?action=exams")%>">Exams</a>
       <a class = "active" href = "<%=response.encodeURL(request.getContextPath() + "/AdminController?action=materials")%>">Materials</a>
-      <p style="float: right; color: white;"><%=session.getAttribute("user")%></p> 
+      <p style="float:right; color: white; margin-top:0.75%; margin-right:0.5%;"><%=session.getAttribute("user")%></p> 
  </div>
 
 <div class="container">
@@ -38,7 +38,7 @@
             $('#load_failed_alert').hide();
         </script>
 
-        <table class="table table-striped table-bordered" style="margin-top: 5%;">
+        <table class="table table-striped table-bordered" style="margin-top: 5%; margin-left:-8%;">
             <thead style="text-align: center;">
                 <tr>
                     <th>Material Name</th> 
@@ -77,10 +77,16 @@
             </tbody>	
         </table>
         
-        <form method="get" action="<%=response.encodeURL(request.getContextPath() + "/MaterialController")%>">
+        <form method="get" action="<%=response.encodeURL(request.getContextPath() + "/MaterialController")%>" style="margin-left:-8%;">
         	<input type="hidden" name="action" value="add">
         	<input type="hidden" name="user" value="<%=session.getAttribute("user")%>">
         	<input type="submit" value="Add" class="btn btn-primary">
+        </form>
+        
+        <form method="get" action="<%=response.encodeURL(request.getContextPath() + "/MaterialController")%>" style="margin-left:-2.75%; margin-top:-3.4%;">
+        	<input type="hidden" name="action" value="addfile">
+        	<input type="hidden" name="user" value="<%=session.getAttribute("user")%>">
+        	<input type="submit" value="Add File" class="btn btn-primary">
         </form>
 	</div>
 </body>
