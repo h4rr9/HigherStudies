@@ -13,6 +13,13 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	<style>
+body {
+	background-image: url("/HigherStudies/stylesheets/5.jpg");
+        background-repeat:no-repeat;
+       background-size:cover;
+} 
+</style>
 </head>
 <body>
 <%@ page import="java.util.ArrayList, entities.College, entities.Course, entities.Exam" %>
@@ -31,7 +38,7 @@
 <div class = "topnav">
       <a class = "active" href = "<%=response.encodeURL(request.getContextPath() + "/MainController?action=search")%>">Search</a>
       <a href = "<%=response.encodeURL(request.getContextPath() + "/MainController?action=materials")%>">Study Material</a>
-      <p style="float: right; color: white;"><%=session.getAttribute("user")%></p>
+      <p style="float:right; color: white; margin-top:0.75%; margin-right:0.5%;"><%=session.getAttribute("user")%></p>
     </div>
 
     <div class="container">

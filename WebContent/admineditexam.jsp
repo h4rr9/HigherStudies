@@ -25,21 +25,21 @@
 <form method="post" action="<%=response.encodeURL(request.getContextPath() + "/ExamController?action=edit")%>">
 <input type="hidden" name="user" value="<%=session.getAttribute("user")%>"/>
 <input type="hidden" name="tobemodified" value="<%=exam.getName()%>"/>
-<p>Name</p>
-<input type="text" name="name" value="<%=exam.getName()%>"/>
-<p>About</p>
-<textarea  rows="4" cols="50" name="about"><%=exam.getAbout()%></textarea>
-<p>Image</p>
-<input type="text" name="image" value="<%=exam.getImage()%>"/>
-<p>Portions:</p> 
-<select class="js-example-basic-multiple js-states form-control" name="portions[]" multiple="multiple">
+<h1 style="text-align: center; margin-top:2%;">Edit Exam</h1>
+<div class = "container" style = "margin-top:3%; border: solid; border-color: #f0ead6; border-radius: 10px; padding: 20px;">
+<p>Name</p> <input class = "form-control" type="text" name="name" value="<%=exam.getName()%>" style="margin-top:-1.5%;"/>
+<p>About</p> <textarea class = "form-control" rows="4" cols="50" name="about" style="margin-top:-1.5%;" ><%=exam.getAbout()%></textarea>
+<p>Image</p> <input class = "form-control" type="text" name="image" value="<%=exam.getImage()%>"/>
+<p>Portions</p> 
+<select class="js-example-basic-multiple js-states form-control" name="portions[]" multiple="multiple" style="margin-top:-1.5%;">
 <option value="Physics" <%=portionSet.contains("Physics") ? "selected" : ""%>>Physics</option>
 <option value="Maths" <%=portionSet.contains("Maths") ? "selected" : ""%>>Maths</option>
 <option value="Chemistry" <%=portionSet.contains("Chemistry") ? "selected" : ""%>>Chemistry</option>
 <option value="Verbal" <%=portionSet.contains("Verbal") ? "selected" : ""%>>Verbal</option>
 <option value="Quantitative" <%=portionSet.contains("Quantitative") ? "selected" : ""%>>Quantitative</option>
 </select>
-<input type="submit" value="submit"/>
+<input class="btn btn-outline-secondary" type="submit" value="Edit" style="margin-top:1%;"/>
+</div>
 </form>
 <script>
 $(document).ready(function() {

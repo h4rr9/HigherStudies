@@ -19,8 +19,8 @@
 <body>
 	<div class = "topnav">
       <a href = "<%=response.encodeURL(request.getContextPath() + "/MainController?action=search")%>">Search</a> 
-      <a href = "<%=response.encodeURL(request.getContextPath() + "/MainController?action=materials")%>">Study Material</a>
-      <p style="float: right; color: white;"><%=session.getAttribute("user")%></p>
+      <a class = "active" href = "<%=response.encodeURL(request.getContextPath() + "/MainController?action=materials")%>">Study Material</a>
+      <p style="float:right; color: white; margin-top:0.75%; margin-right:0.5%;"><%=session.getAttribute("user")%></p>
     </div>
 
     <div class="container">

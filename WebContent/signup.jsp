@@ -5,19 +5,22 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Sign Up</title>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" type="text/css"
-	href="/HigherStudies/stylesheets/style2.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="/HigherStudies/stylesheets/style2.css">
+<link rel="stylesheet" type="text/css" href="/HigherStudies/stylesheets/style3.css">
 <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<script
-	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.js"></script>
+<script	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<script	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<style>
+body {
+	background-image: url("/HigherStudies/stylesheets/2.jpg");
+        background-repeat:no-repeat;
+       background-size:cover;
+} 
+
+</style>
 </head>
 <body>
 
@@ -33,8 +36,7 @@
 
 	<form method="post" action="<%= response.encodeURL(request.getContextPath() + "/MainController?action=createaccount") %>" class="container">
 		<h1 style="margin-top: 10%; text-align: center;">User Sign Up</h1>
-		<div
-			style="margin-top: 10%; border: solid; border-color: #f0ead6; border-radius: 10px; padding: 20px;">
+		<div style="margin-top: 10%;">
 			<div class="row">
 				<div class="col-6">
 					<div class="field">

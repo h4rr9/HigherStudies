@@ -1,69 +1,53 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="ISO-8859-1">
-<title>Home</title>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" type="text/css"
-	href="/HigherStudies/stylesheets/style.css">
-<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.js"></script>
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-<script
-	src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <meta charset="utf-8">
+  <title>yourCareers</title>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta content="" name="keywords">
+  <meta content="" name="description">
+
+  <!-- Bootstrap CSS File -->
+  <link href="/HigherStudies/stylesheets/bootstrap.min.css" rel="stylesheet">
+
+  <link href="/HigherStudies/stylesheets/style3.css" rel="stylesheet">
 </head>
+
 <body>
-	<div class="topnav">
-		<a class="active"
-			href="<%=response.encodeURL(request.getContextPath() + "/MainController")%>">Home</a>
-		<button class="btn btn-primary"
-			style="float: right; margin-top: 0.25%; margin-right: 1%;"
-			onclick='window.location.href="<%=response.encodeURL(request.getContextPath() + "/MainController?action=login")%>"'>Login</button>
-	</div>
+  <header id="header">
+    <div class="container-fluid">
 
-	<div class="bg-text" style="margin-top: -10%;">
-		<h1 style="font-size: 50px">yourCareers</h1>
-		<p>Our mission is to help you make the right decision</p>
-	</div>
+      <div id="logo" class="pull-left">
+        <h1><a href="#intro" class="scrollto">yourCareers</a></h1>
+      </div>
 
-	<div class="bg-text" style="margin-top: 5%; height: 300px;">
-		<h3>What we offer</h3>
-		<div class="row" style="margin-top: 10%;">
-			<div class="col">
-				<div class="bg-text2">
-					<h4>Universities</h4>
-				</div>
-			</div>
-			<div class="col">
-				<div class="bg-text2">
-					<h4>Courses</h4>
-				</div>
-			</div>
-			<div class="col">
-				<div class="bg-text2">
-					<h4>Exams</h4>
-				</div>
-			</div>
-			<div class="col">
-				<div class="bg-text2">
-					<h4>Study Materials</h4>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<div>
-		<button id="btn-search" class="btn btn-outline-primary"
-			style="margin-left: 45.5%; margin-top: 40%"
-			onclick='window.location.href="<%=response.encodeURL(request.getContextPath() + "/MainController?action=signup")%>"'>Sign
-			Up</button>
-	</div>
+      <nav id="nav-menu-container">
+        <ul class="nav-menu">
+          <li class="menu-active"><a class="active" href="<%=response.encodeURL(request.getContextPath() + "/MainController")%>">Home</a></li>
+          <li><a href='<%=response.encodeURL(request.getContextPath() + "/MainController?action=login")%>'>Login</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header><!-- #header -->
+  <section id="intro">
+    <div class="intro-container">
+      <div id="introCarousel" class="carousel  slide carousel-fade" data-ride="carousel">
+        <div class="carousel-inner" role="listbox">
+          <div class="carousel-item active">
+            <div class="carousel-background"><img src="/HigherStudies/stylesheets/1.jpg" alt=""></div>
+            <div class="carousel-container">
+              <div class="carousel-content">
+                <h2>We are professional</h2>
+                <p>We have the best of best of the most trained operatives at our company to help your find your true path in life to success</p>
+                <a class="btn-get-started scrollto" href='<%=response.encodeURL(request.getContextPath() + "/MainController?action=signup")%>'>Get Started</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 </body>
 </html>

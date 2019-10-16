@@ -26,9 +26,11 @@
 <form method="post" action="<%=response.encodeURL(request.getContextPath() + "/CollegeController?action=edit")%>">
 <input type="hidden" name="user" value="<%=session.getAttribute("user")%>"/>
 <input type="hidden" name="tobemodified" value="<%=college.getName()%>"/>
-<h4>Name</h4> <input type="text" name="name" value="<%=college.getName()%>"/>
-<p>About</p> <textarea  rows="4" cols="50" name="about"><%=college.getAbout()%></textarea>
-<p>Image</p> <input type="text" name="image" value="<%=college.getImage()%>"/>
+<h1 style="text-align: center; margin-top:2%;">Edit College</h1>
+<div class="container" style = "margin-top:3%; border: solid; border-color: #f0ead6; border-radius: 10px; padding: 20px;">
+<p>Name</p> <input class = "form-control" type="text" name="name" value="<%=college.getName()%>"/>
+<p>About</p> <textarea  rows="4" cols="50" name="about" class = "form-control"><%=college.getAbout()%></textarea>
+<p>Image</p> <input class = "form-control" type="text" name="image" value="<%=college.getImage()%>"/>
 <p>Courses:</p> 
 <select class="js-example-basic-multiple js-states form-control" name="courses[]" multiple="multiple">
 <option value="BTech" <%=courseSet.contains("BTech") ? "selected" : ""%>>BTech</option>
@@ -43,7 +45,8 @@
 <option value="AEEE" <%=examSet.contains("AEEE") ? "selected" : ""%>>AEEE</option>
 </select>
 </p>
-<input type="submit" value="submit"/>
+<input class="btn btn-outline-secondary" type="submit" value="Edit"/>
+</div>
 </form>
 <script>
 $(document).ready(function() {
