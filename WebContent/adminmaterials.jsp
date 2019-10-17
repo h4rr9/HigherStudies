@@ -38,13 +38,13 @@
             $('#load_failed_alert').hide();
         </script>
 
-        <table class="table table-striped table-bordered" style="margin-top: 5%; margin-left:-8%;">
+        <table class="table table-striped table-bordered" style="margin-top: 5%; margin-left:-10%;">
             <thead style="text-align: center;">
                 <tr>
-                    <th>Material Name</th> 
-                    <th>About</th>
-                    <th>Image  Link</th>
-                    <th>References</th>
+                    <th style = "width : 100px">Material Name</th> 
+                    <th style = "width : 300px">About</th>
+                    <th style = "width : 200px">Image  Link</th>
+                    <th style = "width : 100px">References</th>
                     <th></th>
                     <th></th>
                 </tr>
@@ -53,10 +53,10 @@
             <tbody>
                 <%for(Material material : materials){ %>
                 <tr>
-                    <td style="font-size: 15px"><%=material.getName()%></td>
-                    <td style="font-size: 15px"><%=material.getAbout()%></td>
-                    <td style="font-size: 15px"><%=material.getImage()%></td>
-                    <td style="font-size: 15px"><%=Arrays.toString(material.getReferences())%><br></td>
+                    <td style="font-size: 15px; width : 100px"><%=material.getName()%></td>
+                    <td style="font-size: 15px; width : 300px"><%=material.getAbout()%></td>
+                    <td style="font-size: 15px; width : 200px"><%=material.getImage()%></td>
+                    <td style="font-size: 15px; width : 100px"><%=Arrays.toString(material.getReferences())%><br></td>
                     <td>
                     	<form onsubmit="return confirm('Are you Sure?');" action="<%=response.encodeURL(request.getContextPath() + "/MaterialController?action=delete")%>" method="post">
                     		<input type="hidden" name="user" value="<%=session.getAttribute("user")%>">
@@ -77,13 +77,13 @@
             </tbody>	
         </table>
         
-        <form method="get" action="<%=response.encodeURL(request.getContextPath() + "/MaterialController")%>" style="margin-left:-8%;">
+        <form method="get" action="<%=response.encodeURL(request.getContextPath() + "/MaterialController")%>" style="margin-left:-10%;">
         	<input type="hidden" name="action" value="add">
         	<input type="hidden" name="user" value="<%=session.getAttribute("user")%>">
         	<input type="submit" value="Add" class="btn btn-primary">
         </form>
         
-        <form method="get" action="<%=response.encodeURL(request.getContextPath() + "/MaterialController")%>" style="margin-left:-2.75%; margin-top:-3.4%;">
+        <form method="get" action="<%=response.encodeURL(request.getContextPath() + "/MaterialController")%>" style="margin-left:-4.75%; margin-top:-3.4%;">
         	<input type="hidden" name="action" value="addfile">
         	<input type="hidden" name="user" value="<%=session.getAttribute("user")%>">
         	<input type="submit" value="Add File" class="btn btn-primary">

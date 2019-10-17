@@ -61,8 +61,8 @@
                     <td style="font-size: 15px"><%=user.getDob()%><br></td>
                     <td style="font-size: 15px"><%=user.getNumber()%><br></td>
                     <td>
-                    	<form onsubmit="return confirm('Are you Sure?');" action="<%=response.encodeURL(request.getContextPath() + "/AccountController?action=delete")%>" method="post">
-                    		<input type="hidden" name="name" value="<%=session.getAttribute("name")%>">
+                    	<form onsubmit="return confirm('Are you Sure?');" action="<%=response.encodeURL(request.getContextPath() + "/UserController?action=delete")%>" method="post">
+                    		<input type="hidden" name="name" value="<%=session.getAttribute("user")%>">
                     		<input type="hidden" name="email" value="<%=user.getEmail()%>">
                     		<input type="submit" class="btn btn-danger" class="border border-danger" value="Delete">
                     	</form>

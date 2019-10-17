@@ -1,6 +1,9 @@
 package entities;
 
-public class Admin {
+import java.io.Serializable;
+
+@SuppressWarnings("serial")
+public class Admin implements Serializable{
 	private String username;
 	private String password;
 	public Admin(String username, String password) {

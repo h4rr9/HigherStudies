@@ -1,8 +1,10 @@
 package entities;
 
+import java.io.Serializable;
 import java.util.Arrays;
 
-public class Course {
+@SuppressWarnings("serial")
+public class Course implements Serializable{
 	private String name;
 	private String about;
 	private String prospects;

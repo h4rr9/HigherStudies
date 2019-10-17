@@ -38,7 +38,7 @@
             $('#load_failed_alert').hide();
         </script>
 
-        <table class="table table-striped table-bordered" style="margin-top: 5%;">
+        <table class="table table-striped table-bordered" style="margin-top: 5%; margin-left:-8%;">
             <thead style="text-align: center;">
                 <tr>
                     <th>Exam Name</th> 
@@ -80,7 +80,7 @@
         <form method="get" action="<%=response.encodeURL(request.getContextPath() + "/ExamController")%>">
         	<input type="hidden" name="action" value="add">
         	<input type="hidden" name="user" value="<%=session.getAttribute("user")%>">
-        	<input type="submit" value="Add" class="btn btn-primary">
+        	<input type="submit" value="Add" class="btn btn-primary" style="margin-left:-8%;">
         </form>
 	</div>
 </body>

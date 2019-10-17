@@ -32,9 +32,7 @@
     	<p><%=college.getAbout()%></p>
 
     	<div class="row" style="margin-top: 2%;">
-    		
-    			<img src="<%=college.getImage()%>" style="height: 325px; width: 212.5px;">
-    	
+    			<img src="<%=college.getImage()%>" style="height: 325px; width: 600px; margin-left:25%;">
     	</div>
 
     	<h3 style="margin-top: 2%;">Courses Offered</h3>

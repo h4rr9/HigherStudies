@@ -37,7 +37,7 @@
         <div class="col-4">
           <center>
             <a href="<%=response.encodeURL(request.getContextPath() + "/PageController?type=material&page=" + name)%>">
-              <div class="card" style="width: 212.5px; height: 325px; background-color: #A09BE7;">
+              <div class="card" style="width: 212.5px; height: 325px; background-color: #C0C0C0;">
                 <span style="text-align: center; color: white; margin-top: 65%; font-size: 20px;"><%=name%></span>
               </div>
             </a>
@@ -48,7 +48,7 @@
       </div>
       <%}%>
       
-      <a href="<%=response.encodeURL(request.getContextPath() + "/MainController?action=getfile")%>"><button>Download Materials</button></a>
+      <a href="<%=response.encodeURL(request.getContextPath() + "/MainController?action=getfile")%>"><button class = "btn btn-primary" style = "margin-top:1%;float:centre;">Download Materials</button></a>
       
     </div>
 </body>

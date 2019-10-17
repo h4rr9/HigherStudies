@@ -30,13 +30,13 @@
     	<p><%=exam.getAbout()%></p>
 
 		<div class="row" style="margin-top: 2%;">
-  			<img src="<%=exam.getImage()%>" style="height: 325px; width: 212.5px;">
+  			<img src="<%=exam.getImage()%>" style="height: 325px; width: 212.5px; margin-left:40%;">
     	</div>
 
     	<h3 style="margin-top: 2%;">Portion to prepare</h3>
     	<ul>
     	<%for(String material : exam.getPortions()){ %>
-    		<li><a href="<%=response.encodeURL(request.getContentType() + "/PageController?type=material&page=" + material) %>"><%=material%></a></li>
+    		<li><a href="<%=response.encodeURL(request.getContextPath() + "/PageController?type=material&page=" + material) %>"><%=material%></a></li>
 		<%} %>
     	</ul>
     </div>

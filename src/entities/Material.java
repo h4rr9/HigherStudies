@@ -1,8 +1,10 @@
 package entities;
 
+import java.io.Serializable;
 import java.util.Arrays;
 
-public class Material {
+@SuppressWarnings("serial")
+public class Material implements Serializable{
 	private String name;
 	private String image;
 	private String about;

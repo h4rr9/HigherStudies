@@ -30,7 +30,7 @@
     	<p><%=course.getAbout()%></p>
     	
     	<div class="row" style="margin-top: 2%;">
-  			<img src="<%=course.getImage()%>" style="height: 325px; width: 212.5px;">
+    		<img src="<%=course.getImage()%>" style="height: 325px; width: 600px; margin-left:25%;">
     	</div>
 
     	<h3 style="margin-top: 2%;">Future Prospects</h3>

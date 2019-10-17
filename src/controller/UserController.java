@@ -83,12 +83,14 @@ public class UserController extends HttpServlet {
 			UserModel userModel = new UserModel(conn);
 
 			try {
-				String user = request.getParameter("user");
+				String user = request.getParameter("name");
 				String email = request.getParameter("email");
 
 				HttpSession session = request.getSession();
 
 				String curruser = (String) session.getAttribute("user");
+				System.out.println(curruser);
+				System.out.println(user);
 
 				if (curruser == null) {
 					response.sendRedirect("/HigherStudies/AdminController?action=login");
@@ -96,6 +98,7 @@ public class UserController extends HttpServlet {
 					userModel.removeUser(email);
 					response.sendRedirect("/HigherStudies/AdminController?action=users");
 				} else {
+					System.out.println("here");
 					response.sendRedirect("/HigherStudies/AdminController?action=login");
 				}
 			} catch (SQLException e) {

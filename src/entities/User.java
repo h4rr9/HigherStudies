@@ -1,6 +1,9 @@
 package entities;
 
-public class User {
+import java.io.Serializable;
+
+@SuppressWarnings("serial")
+public class User implements Serializable{
 	String firstname = "";
 	String lastname = "";
 	String email = "";

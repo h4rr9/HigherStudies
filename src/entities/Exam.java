@@ -1,8 +1,10 @@
 package entities;
 
+import java.io.Serializable;
 import java.util.Arrays;
 
-public class Exam {
+@SuppressWarnings("serial")
+public class Exam implements Serializable{
 	private String name;
 	private String about;
 	private String image;
